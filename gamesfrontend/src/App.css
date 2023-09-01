@@ -1,0 +1,150 @@
+.pokemonCard{
+  width: 20rem;
+  border-radius: 3rem;
+  color: black;
+  text-align: center;
+  border: solid black .2rem;
+  margin: auto;
+  height: 100%;
+}
+
+.pokemonCard h3{
+  font-size: 1.5rem;
+  color: white;
+}
+
+.pokemonCard p{
+  font-size: 1.5rem;
+}
+
+.pokemonBackground{
+  margin: .75rem;
+  background-color: rgb(0 0 0 / 50%);
+  border-radius: 2rem;
+  padding-bottom: .5rem;
+}
+
+.pokemonBackground h2{
+  margin-top: -.75rem;
+  margin-bottom: .5rem;
+  color: white;
+}
+
+.pokemonInfo{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1rem;
+  margin: .25rem .25rem 1rem .25rem;
+
+}
+
+.pokemonInfo p{
+  margin: 0;
+}
+
+.pokemonInfo h3{
+  margin-top: -.5rem;
+  margin-bottom: .5rem;
+}
+
+.spanColumns{
+  grid-column: 1/-1;
+}
+
+.attacks{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.attacks h3{
+  margin-top: -2rem;
+  font-size: 1.75rem;
+}
+
+.attacks p{
+  margin-top: -1rem;
+}
+
+.itemImage{
+  height: 3rem;
+  width: 3rem;
+}
+
+.itemImageContainer{
+  margin-bottom: 3rem;
+}
+
+.pokemonImage{
+  height: 10rem;
+  width: 10rem;
+  margin-top: -.25rem;
+  margin-bottom: 1rem;
+}
+
+.typeImage{
+  height: 1.5rem;
+  width: 3.5rem;
+  margin: .25rem;
+}
+
+.typeImageContainer{
+  margin-bottom: 3rem;
+}
+
+.searchBar{
+  text-align: left;
+  padding: 1rem;
+  border-radius: 3rem;
+  border: solid .15rem black;
+  margin: auto;
+  width: 90%;
+}
+
+.searchBarContainer{
+  text-align: center;
+  margin: 1rem auto 1rem auto;
+  display: inline;
+  width: 100%;
+ 
+}
+
+.pokemonContainer{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 22rem);
+  justify-content: center;
+  row-gap: 2rem;
+  column-gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.resetButtonContainer{
+  text-align: left;
+  margin: 1rem auto 1rem auto;
+}
+
+.resetButton{
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background-color: white;
+  margin: auto;
+  
+}
+
+.resetButton:hover{
+  cursor: pointer;
+  border: solid 2px #ee1515;
+}
+
+.resetButton:active{
+  transform: translateY(.25rem); 
+}
+
+.searchContainer{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,500px));
+  column-gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto 1rem auto;
+}
