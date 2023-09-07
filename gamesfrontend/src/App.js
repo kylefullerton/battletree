@@ -145,7 +145,7 @@ function App() {
     let data;
     axios({
       method: 'get',
-      url: 'http://localhost:8000/pokemon/',
+      url: 'http://3.135.247.138:8000/pokemon/',
     }).then(response => {
       data = response.data;
       setPokemonList(data);
@@ -154,7 +154,7 @@ function App() {
 
     axios({
       method: 'get',
-      url: 'http://localhost:8000/trainer/'
+      url: 'http://3.135.247.138:8000//trainer/'
     }).then(response => {
       data = response.data
       setTrainerList(data)
