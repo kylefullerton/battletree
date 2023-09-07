@@ -21,12 +21,12 @@
   margin: .75rem;
   background-color: rgb(0 0 0 / 50%);
   border-radius: 2rem;
-  padding-bottom: .5rem;
+  padding-top: .25rem;
 }
 
 .pokemonBackground h2{
-  margin-top: -.75rem;
   margin-bottom: .5rem;
+  margin-top: .25rem;
   color: white;
 }
 
@@ -58,6 +58,7 @@
 }
 
 .attacks h3{
+  margin-bottom: 1.5rem;
   margin-top: -2rem;
   font-size: 1.75rem;
 }
@@ -66,47 +67,44 @@
   margin-top: -1rem;
 }
 
+.imageContainer{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
 .itemImage{
   height: 3rem;
   width: 3rem;
-}
-
-.itemImageContainer{
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .pokemonImage{
   height: 10rem;
   width: 10rem;
   margin-top: -.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .typeImage{
   height: 1.5rem;
   width: 3.5rem;
-  margin: .25rem;
+  margin: 0 .25rem 2rem .25rem;
 }
 
-.typeImageContainer{
-  margin-bottom: 3rem;
-}
 
 .searchBar{
   text-align: left;
   padding: 1rem;
   border-radius: 3rem;
   border: solid .15rem black;
+  width: 60%;
   margin: auto;
-  width: 90%;
 }
 
 .searchBarContainer{
   text-align: center;
-  margin: 1rem auto 1rem auto;
-  display: inline;
-  width: 100%;
- 
+  margin: auto;
 }
 
 .pokemonContainer{
@@ -116,10 +114,11 @@
   row-gap: 2rem;
   column-gap: 1rem;
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .resetButtonContainer{
-  text-align: left;
+  text-align: center;
   margin: 1rem auto 1rem auto;
 }
 
@@ -140,11 +139,57 @@
   transform: translateY(.25rem); 
 }
 
-.searchContainer{
+.buttonContainer{
+  margin: auto;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  align-items: center;
+}
+
+.radioButton{
+  display: inline;
+  margin-right: 1rem;
+}
+
+.radioButtonLabel{
+  font-size: 1.1rem;
+  margin-left: .5rem;
+}
+
+.dropdownContainer{
+  display: inline;
+}
+
+.trainerCard{
+  width: 20rem;
+  border-radius: 3rem;
+  color: black;
+  text-align: center;
+  border: solid black .2rem;
+  margin: auto;
+  height: 100%;
+}
+
+.trainerImage{
+  height: 12.5rem;
+  width: 12.5rem;
+  margin-bottom: 1rem;
+}
+
+.trainerCard:hover{
+  filter: brightness(75%);
+  cursor: pointer;
+}
+
+/* .searchContainer{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px,500px));
   column-gap: 4rem;
   align-items: center;
   justify-content: center;
   margin: 1rem auto 1rem auto;
-}
+} */

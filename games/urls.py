@@ -14,14 +14,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+# from django.contrib import admin
 from django.urls import path
 from games import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('pokemon/', views.pokemon_list),
-    path('pokemon/<int:id>', views.pokemon_detail)
+    path('pokemon/<int:id>', views.pokemon_detail),
+    path('pokemon/<str:game>', views.pokemon_game_list),
+    path('trainer/', views.trainer_list),
+    path('trainer/<int:id>', views.trainer_detail),
+    path('trainer/<str:game>', views.trainer_game_list),
+    path('', TemplateView.as_view(template_name='index.html'))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
