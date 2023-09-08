@@ -440,6 +440,7 @@ export const ITEM_IMAGES = {
     oranberry: require('./items/oranberry.png'),
     pechaberry: require('./items/pechaberry.png'),
     persimberry: require('./items/persimberry.png'),
+    petayaberry: require('./items/petayaberry.png'),
     poisonbarb: require('./items/poisonbarb.png'),
     powerherb: require('./items/powerherb.png'),
     quickclaw: require('./items/quickclaw.png'),

@@ -145,7 +145,7 @@ function App() {
     let data;
     axios({
       method: 'get',
-      url: 'http://3.135.247.138:8000/pokemon/',
+      url: process.env.REACT_APP_POKEMON_URL,
     }).then(response => {
       data = response.data;
       setPokemonList(data);
@@ -154,7 +154,7 @@ function App() {
 
     axios({
       method: 'get',
-      url: 'http://3.135.247.138:8000//trainer/'
+      url: process.env.REACT_APP_TRAINER_URL
     }).then(response => {
       data = response.data
       setTrainerList(data)
