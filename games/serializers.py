@@ -8,8 +8,15 @@ class PokemonSerializer(serializers.ModelSerializer):
                    'nature', 'ev1', 'ev2', 'ev3', 'ev4', 'ev5', 'ev6']
 
 class TrainerSerializer(serializers.ModelSerializer):
-    pokemon = PokemonSerializer(many=True, required=False)
+    # pokemon = PokemonSerializer(many=True, required=False)
 
     class Meta:
         model = Trainer
-        fields = ['id', 'name', 'gameName', 'trainerClass', 'imageName', 'pokemon']
+        fields = ['id', 'name', 'gameName', 'trainerClass', 'subClass', 'pokemon']
+
+class ReadTrainerSerializer(serializers.ModelSerializer):
+    pokemon = PokemonSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Trainer
+        fields = ['id', 'name', 'gameName', 'trainerClass', 'subClass', 'pokemon']

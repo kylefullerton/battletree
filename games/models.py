@@ -26,7 +26,7 @@ class Trainer(models.Model):
     name = models.CharField(max_length=250)
     gameName = models.CharField(max_length=250)
     trainerClass = models.CharField(max_length=250)
-    imageName = models.CharField(max_length=250, default="")
+    subClass = models.CharField(max_length=250, blank=True, default="")
     pokemon = models.ManyToManyField(Pokemon)
 
     def __str__(self):

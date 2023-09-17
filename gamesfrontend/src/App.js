@@ -5,134 +5,6 @@ import axios from 'axios';
 
 
 function App() {
-  let pokemon = {
-   "charmander" : 
-   [
-      {
-        name: "Charmander",
-        type1: "FIGHTING",
-        type2: "",
-        attacks: ["Flamethrower", "Dragon Pulse", "Solarbeam", "Overheat"],
-        ability: "Blaze",
-        nature: "Modest",
-        holdItem: "Choice Specs",
-        evs: ["Special Attack", "Speed"]
-      },
-      {
-        name: "Charmander",
-        type1: "BUG",
-        type2: "",
-        attacks: ["Flamethrower", "Air Slash", "Solarbeam", "Sunny Day"],
-        ability: "Solar Power",
-        nature: "Modest",
-        holdItem: "Life Orb",
-        evs: ["Special Attack", "Speed"]
-      }
-    ],
-
-  "squirtle" : 
-    [
-      {
-        name: "Squirtle",
-        type1: "WATER",
-        type2: "",
-        attacks: ["Surf", "Ice Beam", "Dark Pulse", "Aura Sphere"],
-        ability: "Torrent",
-        nature: "Quiet",
-        holdItem: "Choice Specs",
-        evs: ["Special Attack", "HP", "Defense"]
-      },
-      {
-        name: "Squirtle",
-        type1: "ICE",
-        type2: "",
-        attacks: ["Surf", "Ice Beam", "Dark Pulse", "Rain Dance"],
-        ability: "Torrent",
-        nature: "Bold",
-        holdItem: "Leftovers",
-        evs: ["Special Defense", "HP", "Defense"]
-      },
-    ],
-  "bulbasaur" :
-    [
-      {
-        name: "Bulbasaur",
-        type1: "ROCK",
-        type2: "",
-        attacks: ["Sludge Bomb", "Earthquake", "Weather Ball", "Petal Dance"],
-        ability: "Overgrow",
-        nature: "Quirky",
-        holdItem: "Life Orb",
-        evs: ["Special Attack", "Special Defense"]
-      },
-      {
-        name: "Bulbasaur",
-        type1: "GROUND",
-        type2: "",
-        attacks: ["Leaf Storm", "Sludge Bomb", "Hidden Power", "Rock Slide"],
-        ability: "Overgrow",
-        nature: "Timid",
-        holdItem: "Leftovers",
-        evs: ["Special Attack", "Speed"]
-      }
-    ]
-  }
-
-  let testList = [
-      {
-        "id": 1,
-        "name": "Charmander",
-        "type1": "FIRE",
-        "type2": "",
-        "item": "",
-        "attack1": "Flamethrower",
-        "attack2": "Dragon Pulse",
-        "attack3": "Solar Beam",
-        "attack4": "Overheat",
-        "nature": "Modest",
-        "ev1": "Sp Atk",
-        "ev2": "Speed",
-        "ev3": ""
-    },
-    {
-        "id": 2,
-        "name": "Squirtle",
-        "type1": "WATER",
-        "type2": "",
-        "item": "Life Orb",
-        "attack1": "Surf",
-        "attack2": "Ice Beam",
-        "attack3": "Aura Sphere",
-        "attack4": "Dark Pulse",
-        "nature": "Modest",
-        "ev1": "Sp Atk",
-        "ev2": "HP",
-        "ev3": "Sp Def"
-    },
-    {
-        "id": 3,
-        "name": "Bulbasaur",
-        "type1": "GRASS",
-        "type2": "POISON",
-        "item": "Leftovers",
-        "attack1": "Leaf Storm",
-        "attack2": "Toxic",
-        "attack3": "Protect",
-        "attack4": "Sludge Bomb",
-        "nature": "Timid",
-        "ev1": "Sp Atk",
-        "ev2": "HP",
-        "ev3": ""
-    }
-  ]
-
-  let trainer = {
-    "name": "Carly",
-    "trainerClass": "Hex Maniac",
-    "imageName": "hexmaniac",
-    "pokemon": []
-  }
-
   const [searchInput, setSearchInput] = useState("");
   const [pokemonList, setPokemonList] = useState([]);
   const [pokemonRenderList, setPokemonRenderList] = useState([]);
@@ -188,7 +60,8 @@ function App() {
 
   let radioButtonProps = {
     searchPokemon: searchPokemon,
-    setSearchPokemon: setSearchPokemon
+    setSearchPokemon: setSearchPokemon,
+    trainerSelected: trainerSelected
   }
 
   let trainerProps = {
@@ -207,10 +80,11 @@ function App() {
         <ResetButton resetButtonProps = {resetButtonProps}/>
         <RadioButton radioButtonProps = {radioButtonProps}/>
       </div>
+      <ScrollButton />
       {Object.keys(trainerSelected).length != 0 && 
       (
         <div>
-          <Trainer data={trainerSelected} trainerProps={trainerProps} />
+          <Trainer data={trainerSelected} trainerProps={trainerProps} id="trainerSelected"/>
           <div className="pokemonContainer">
             {trainerSelected.pokemon.map((pokemonObject) => <Pokemon data={pokemonObject} />)}
           </div>
@@ -239,6 +113,9 @@ function App() {
 }
 
 function SearchBar(props){
+  let placeholderText;
+  props.searchBarProps.searchPokemon ? placeholderText = "Enter a Pokemon name" : placeholderText = "Enter a trainer name";
+
   function handleSearch(event){
     if(event.key === 'Enter'){
       let query = event.target.value.toLowerCase();
@@ -258,7 +135,6 @@ function SearchBar(props){
         let trainerDict = props.searchBarProps.trainerList;
         if(query in trainerDict){
           if(trainerDict[query].length == 1){
-            console.log(props.searchBarProps);
             props.searchBarProps.setTrainerSelected(trainerDict[query][0]);
           }
           else{
@@ -267,27 +143,19 @@ function SearchBar(props){
           }
         }
       }
-
-
-
-      // let renderList = props.searchBarProps.pokemonList.filter(
-      //   (pokemon) => {return pokemon.name.toLowerCase() === query})
-      
-      // if(renderList.length > 0){
-      //   props.searchBarProps.setRenderList(renderList);
-      // }
     }
   }
 
   return (
     <div className="searchBarContainer">
-      <input type="search" className="searchBar" placeholder="Enter a Pokemon name" onKeyDown={handleSearch} label="Search"/>
+      <input type="search" className="searchBar" placeholder={placeholderText} onKeyDown={handleSearch} label="Search"/>
     </div>
 
   )
 }
 
 function RadioButton(props){
+  let isDisabled = Object.keys(props.radioButtonProps.trainerSelected).length != 0;
   function handleButtonPress(event){
     event.target.value === "trainer" ? 
       props.radioButtonProps.setSearchPokemon(false):
@@ -297,13 +165,13 @@ function RadioButton(props){
     <div>
       <div className="radioButton">
         <input type="radio" id="pokemon" value="pokemon" onChange={handleButtonPress} 
-        checked={props.radioButtonProps.searchPokemon}/>
+        checked={props.radioButtonProps.searchPokemon} disabled={isDisabled}/>
         <label className="radioButtonLabel">Search Pokemon</label>
       </div>
 
       <div className="radioButton">
         <input type="radio" id="trainer" value="trainer" onChange={handleButtonPress} 
-        checked={!props.radioButtonProps.searchPokemon}/>
+        checked={!props.radioButtonProps.searchPokemon} disabled={isDisabled}/>
         <label className="radioButtonLabel">Search Trainers</label>
       </div>
     </div>
@@ -344,96 +212,75 @@ function ResetButton(props){
   )
 }
 
+function ScrollButton(props){
+
+  function goToTop(event){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  return(
+    <div>
+      <button className="scrollButton" id="topButton" onClick={goToTop}>To Top</button>
+    </div>
+  )
+}
+
 
 function Pokemon(props){
-  //name, type1, type2, item, attacks, ability, nature, evs, image
-  let pokemonImageName = props.data.displayName.toLowerCase();
-  let itemImageName = props.data.item.split(" ").join("").toLowerCase();
-  let backgroundColor1 = getBackgroundColor(props.data.type1.toUpperCase());
-  let backgroundColor2 = props.data.type2 != "" ? getBackgroundColor(props.data.type2.toUpperCase()) : backgroundColor1;
+  const punctuation = /[-.:\']/g;
+  let backgroundColorTypes = {
+    "FIRE": "#EE8130",
+    "WATER": "#6390F0",
+    "GRASS": "#7AC74C",
+    "NORMAL": "#A8A77A",
+    "GROUND": "#E2BF65",
+    "ROCK": "#B6A136",
+    "FLYING": "#A98FF3",
+    "STEEL": "#B7B7CE",
+    "DARK": "#705746",
+    "PSYCHIC": "#F95587",
+    "FAIRY": "#D685AD",
+    "BUG":" #A6B91A",
+    "ELECTRIC": "#F7D02C",
+    "POISON": "#A33EA1",
+    "FIGHTING": "#C22E28",
+    "GHOST": "#735797",
+    "DRAGON": "#6F35FC",
+    "ICE": "#96D9D6",
+}
+
+  let pokemonImageName = props.data.displayName.replace(punctuation, "").split(" ");
+  pokemonImageName = pokemonImageName.join("").toLowerCase();
+  
+  let itemImageName = props.data.item.replace(punctuation,"").split(" ");
+  itemImageName = itemImageName.join("").toLowerCase();
+
+  let backgroundColor1 = backgroundColorTypes[props.data.type1.toUpperCase()];
+  let backgroundColor2 = props.data.type2 != "" ? backgroundColorTypes[props.data.type2.toUpperCase()] : backgroundColor1;
 
   let backgroundStyle = {
     background: `linear-gradient(90deg, ${backgroundColor1} 50%, ${backgroundColor2} 50%)`,
-  }
-
-
-  function getBackgroundColor(type){
-    let color = ""
-
-    switch(type.toUpperCase()){
-      case "FIRE":
-        color = "#EE8130";
-        break;
-      case "WATER":
-        color = "#6390F0";
-        break;
-      case "GRASS":
-        color = "#7AC74C";
-        break;
-      case "NORMAL":
-        color = "#A8A77A";
-        break;
-      case "GROUND":
-        color = "#E2BF65";
-        break;
-      case "ROCK":
-        color = "#B6A136";
-        break;
-      case "FLYING":
-        color = "#A98FF3";
-        break;
-      case "STEEL":
-        color = "#B7B7CE";
-        break;
-      case "DARK":
-        color = "#705746";
-        break;
-      case "PSYCHIC":
-        color = "#F95587";
-        break;
-      case "FAIRY":
-        color = "#D685AD";
-        break;
-      case "BUG":
-        color = "#A6B91A";
-        break;
-      case "ELECTRIC":
-        color = "#F7D02C";
-        break;
-      case "POISON":
-        color = "#A33EA1";
-        break;
-      case "FIGHTING":
-        color = "#C22E28";
-        break;
-      case "GHOST":
-        color = "#735797";
-        break;
-      case "DRAGON":
-        color = "#6F35FC";
-        break;
-      default :
-        color = "#96D9D6";
-    }
-
-    return color;
   }
 
   return (
     <div className="pokemonCard" style={backgroundStyle}>
       <div className="pokemonBackground spanColumns">
         <h2>{props.data.displayName}</h2>
-        <img src={POKEMON_IMAGES[pokemonImageName]} className="pokemonImage"/>
-        
+        <img src={POKEMON_IMAGES[pokemonImageName]} className="pokemonImage" alt={props.data.displayName}/>
       </div>
 
       <div className="imageContainer">
         <div className="typeImageContainer">
-          <img src={TYPE_IMAGES[props.data.type1.toLowerCase()]} className="typeImage"/>
-          {props.data.type2 != "" && <img src={TYPE_IMAGES[props.data.type2.toLowerCase()]} className="typeImage"/>}
+          <img src={TYPE_IMAGES[props.data.type1.toLowerCase()]} className="typeImage" alt={props.data.type1}/>
+          {props.data.type2 != "" && <img src={TYPE_IMAGES[props.data.type2.toLowerCase()]} className="typeImage" alt={props.data.type2}/>}
         </div>
         <div className="itemImageContainer">
-          {props.data.item != "" && <img src={ITEM_IMAGES[itemImageName]} className="itemImage"/>}
+          <div className="tooltip">
+            <span className="tooltipText">{props.data.item}</span>
+            {props.data.item != "" && <img src={ITEM_IMAGES[itemImageName]} className="itemImage" alt={props.data.item}/>}
+          </div>
+          
         </div>
       </div>
 
@@ -465,105 +312,68 @@ function Pokemon(props){
 }
 
 function Trainer(props){
+  let backgroundColorTypes = {
+    "aroma lady": "#7AC74C",
+    "parasol lady": "#7AC74C",
+    "picknicker": "#7AC74C",
+    "battle girl": "#C22E28",
+    "black belt": "#C22E28",
+    "bird keeper": "#A98FF3",
+    "pokemon ranger": "#A98FF3",
+    "bug catcher": "#A6B91A",
+    "bug maniac":"#A6B91A",
+    "camper": "#E2BF65",
+    "triathlete biker": "#E2BF65",
+    "triathlete runner":"#E2BF65",
+    "collector": "#F7D02C",
+    "guitarist": "#F7D02C",
+    "cool trainer": "#6F35FC",
+    "dragon tamer": "#6F35FC",
+    "expert": "#B7B7CE",
+    "fisherman": "#6390F0",
+    "sailor": "#6390F0",
+    "swimmer": "#6390F0",
+    "triathlete swimmer": "#6390F0",
+    "tuber": "#6390F0",
+    "gentleman": "#96D9D6",
+    "rich boy": "#96D9D6",
+    "hex maniac": "#735797",
+    "hiker": "#B6A136",
+    "ruin maniac": "#B6A136",
+    "interviewer": "#A33EA1",
+    "poke maniac": "#A33EA1",
+    "kindler": "#EE8130",
+    "ninja boy":"#705746",
+    "pokemon breeder":"#D685AD",
+    "psychic": "#F95587",
+    "youngster": "#A8A77A",
+    "lass": "#A8A77A",
+    "school kid": "#A8A77A",
+    "lady": "#A8A77A",
+    "pokefan": "#A8A77A",
+    "beauty": "#A8A77A",
+  }
+
   let trainerName = props.data.trainerClass + " " + props.data.name;
-  let backgroundColor = getBackgroundColor(props.data.trainerClass);
+  let trainerImageName = props.data.trainerClass + props.data.subClass;
+  trainerImageName = trainerImageName.split(" ").join("").toLowerCase();
+  let backgroundColor = backgroundColorTypes[props.data.trainerClass.toLowerCase()];
   let backgroundStyle = {
     background: backgroundColor
   }
 
-
-  function getBackgroundColor(trainerClass){
-    let color = "";
-    trainerClass = trainerClass.toLowerCase()
-
-    switch(trainerClass){
-      case "aroma lady":
-      case "parasol lady":
-      case "picknicker":
-        color = "#7AC74C";
-        break;
-      case "battle girl":
-      case "black belt":
-        color = "#C22E28";
-        break;
-      case "bird keeper":
-      case "pokemon ranger":
-        color = "#A98FF3";
-        break;
-      case "bug catcher":
-      case "bug maniac":
-        color = "#A6B91A";
-        break;
-      case "camper":
-      case "triathlete biker":
-      case "triathlete runner":
-        color = "#E2BF65";
-        break;
-      case "collector":
-      case "guitarist":
-        color = "#F7D02C";
-        break;
-      case "cool trainer":
-      case "dragon tamer":
-        color = "#6F35FC";
-        break;
-      case "expert":
-        color = "#B7B7CE";
-        break;
-      case "fisherman":
-      case "sailor":
-      case "swimmer":
-      case "triathlete swimmer":
-      case "tuber":
-        color = "#6390F0";
-        break;
-      case "gentleman":
-      case "rich boy":
-        color = "#96D9D6";
-        break;
-      case "hex maniac":
-        color = "#735797";
-        break;
-      case "hiker":
-      case "ruin maniac":
-        color = "#B6A136";
-        break;
-      case "interviewer":
-      case "poke maniac":
-        color = "#A33EA1";
-        break;
-      case "kindler":
-        color = "#EE8130";
-        break;
-      case "ninja boy":
-        color = "#705746";
-        break;
-      case "pokemon breeder":
-        color = "#D685AD";
-        break;
-      case "psychic":
-        color = "#F95587";
-        break;
-      default:
-        color = "#A8A77A";
-    }
-    return color;
-
-  }
-
   function handleClick(event, trainer){
-    
     props.trainerProps.setTrainerSelected(trainer);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   return (
-    <a>
     <div className="trainerCard" style={backgroundStyle} onClick={() => handleClick(event, props.data)}>
       <h1 style={{"margin": ".75rem"}}>{trainerName}</h1>
-      <img src={TRAINER_IMAGES[props.data.imageName]} className="trainerImage"/>
+      <img src={TRAINER_IMAGES[trainerImageName]} className="trainerImage" alt={trainerName}/>
 
     </div>
-    </a>
   )
 }
 

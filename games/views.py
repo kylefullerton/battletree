@@ -32,7 +32,7 @@ def pokemon_game_list(request, game, format=None):
 def trainer_list(request, format=None):
     if request.method == 'GET':
         trainer = Trainer.objects.all()
-        serializer = TrainerSerializer(trainer, many=True)
+        serializer = ReadTrainerSerializer(trainer, many=True)
         return Response(get_response_dict(serializer, "name"))
     
     isList = isinstance(request.data, list)
