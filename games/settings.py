@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-j3zud$^ywg7m7j8@wirerv2x*8)nh&wsp#ens2k3bbw-x61wr!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["3.135.120.157:8000", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["3.135.120.157:8000", "0.0.0.0", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 # REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permission.AllowAny']}
@@ -61,12 +62,16 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://127.0.0.1:8000',
-    'http://localhost:8000'
+    'http://localhost:8000',
+    'http://ec2-3-135-120-157.us-east-2.compute.amazonaws.com',
+    'http://3.135.120.157'
 ]
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3000',
     'http://127.0.0.1:8000',
-    'http://localhost:8000'
+    'http://localhost:8000',
+    'http://ec2-3-135-120-157.us-east-2.compute.amazonaws.com',
+    'http://3.135.120.157'
 ]
 
 ROOT_URLCONF = 'games.urls'
@@ -138,7 +143,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'static_cdn'),
     os.path.join(BASE_DIR, 'build', 'static')
 ]
 

@@ -315,7 +315,7 @@ function Trainer(props){
   let backgroundColorTypes = {
     "aroma lady": "#7AC74C",
     "parasol lady": "#7AC74C",
-    "picknicker": "#7AC74C",
+    "picnicker": "#7AC74C",
     "battle girl": "#C22E28",
     "black belt": "#C22E28",
     "bird keeper": "#A98FF3",
