@@ -65,6 +65,8 @@
 
 .attacks p{
   margin-top: -1rem;
+  margin-left: .25rem;
+  margin-right: .25rem;
 }
 
 .imageContainer{
@@ -107,9 +109,44 @@
   margin: auto;
 }
 
+.autoCompleteList li{
+  list-style: none;
+  border-bottom: .2rem black solid;
+  border-left: .15rem black solid;
+  border-right: .15rem black solid;
+  margin: 0;
+  padding-left: 0.5rem;
+  padding-bottom: .5rem;
+  text-align: left;
+  font-size: 1.1rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.autoCompleteList li:hover{
+  filter: brightness(75%);
+}
+
+.autoCompleteList{
+  margin: auto;
+  padding: 0;
+  width: 54%;
+}
+
+.autoCompleteList img{
+  height: 3rem;
+  width: 3rem;
+  vertical-align: middle;
+}
+
+.suggestionText{
+  vertical-align: middle;
+  margin: 1.5rem 1rem 1rem 1rem;
+}
+
 .pokemonContainer{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 22rem);
+  grid-template-columns: repeat(auto-fill, 25rem);
   justify-content: center;
   row-gap: 2rem;
   column-gap: 1rem;
@@ -117,14 +154,14 @@
   margin-top: 2rem;
 }
 
-.resetButtonContainer{
-  float: right;
-}
 .resetButton{
   padding: 1rem 2rem;
   font-size: 1rem;
   background-color: white;
-  float: right;
+}
+
+.resetButtonParent{
+  text-align: center;
 }
 
 .resetButton:hover{
@@ -138,27 +175,48 @@
 
 .buttonContainer{
   margin: auto;
-  text-align: center;
   margin: 1.5rem auto 1.5rem auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 25rem);
   align-items: center;
   justify-content: center;
-  column-gap: 3rem;
+  column-gap: 2rem;
+  row-gap: 1rem;
+}
+
+.radioButtonContainer{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .radioButton{
-  text-align: left;
-  margin: .5rem;
+  height: 2rem;
+  width: 2rem;
+  vertical-align: middle;
+}
+
+.radioButton:hover{
+  cursor: pointer;
+  filter: brightness(75%);
+  
 }
 
 .radioButtonLabel{
   font-size: 1.1rem;
-  margin-left: .5rem;
+  margin-left: 1rem;
+  vertical-align: middle;
 }
 
-.dropdownContainer{
-  display: inline;
+.dropDownContainer{
+  margin: auto;
+  text-align: center;
+}
+
+.dropDownLabel{
+  display: block;
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
 }
 
 .trainerCard{
@@ -169,11 +227,12 @@
   border: solid black .2rem;
   margin: auto;
   height: 100%;
+  position: relative;
 }
 
 .trainerImage{
   height: 12.5rem;
-  width: 12.5rem;
+  width: 17.5rem;
   margin-bottom: 1rem;
 }
 
@@ -207,18 +266,20 @@
 
 .scrollButton{
   position: fixed;
-  border: solid .1rem black;
+  border: solid .2rem black;
   font-size: 1.5rem;
   z-index: 1;
   padding: 1rem;
-  margin: 3%;
+  margin: 2%;
   right: 0;
   bottom: 0;
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: transparent;
   cursor: pointer;
 }
 
 .scrollButton:hover{
-  background-color: rgb(55 55 55);
+  background-color: rgb(0 0 0 / 25%);
 }
+
+

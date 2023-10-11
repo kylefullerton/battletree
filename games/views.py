@@ -24,7 +24,7 @@ def pokemon_list(request, format=None):
 
 @api_view(['GET'])
 def pokemon_game_list(request, game, format=None):
-    pokemon = Pokemon.objects.filter(gameName=game.capitalize())
+    pokemon = Pokemon.objects.filter(gameName=game.upper())
     serializer = PokemonSerializer(pokemon, many=True)
     return Response(get_response_dict(serializer, "displayName"))
 
@@ -46,8 +46,8 @@ def trainer_list(request, format=None):
         
 @api_view(['GET'])
 def trainer_game_list(request, game, format=None):
-    pokemon = Trainer.objects.filter(gameName=game.capitalize())
-    serializer = TrainerSerializer(pokemon, many=True)
+    pokemon = Trainer.objects.filter(gameName=game.upper())
+    serializer = ReadTrainerSerializer(pokemon, many=True)
     return Response(get_response_dict(serializer, "name"))
 
 #Need to lookup how patch should be handled for other attributes besides pokemon
@@ -71,7 +71,7 @@ def trainer_detail(request, id, format=None):
         trainer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-@api_view(['PUT','DELETE'])
+@api_view(['GET','PUT','DELETE'])
 def pokemon_detail(request, id, format=None):
     try:
         pokemon = Pokemon.objects.get(pk=id)
@@ -79,7 +79,7 @@ def pokemon_detail(request, id, format=None):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = Pokemon(pokemon)
+        serializer = PokemonSerializer(pokemon);
         return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = PokemonSerializer(pokemon, data=request.data)
