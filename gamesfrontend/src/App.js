@@ -18,7 +18,7 @@ function App() {
     let data;
     axios({
       method: 'get',
-      url: process.env.REACT_APP_POKEMON_URL,
+      url: process.env.REACT_APP_POKEMON_URL + "E"
     }).then(response => {
       data = response.data;
       setPokemonList(data);
@@ -27,7 +27,7 @@ function App() {
 
     axios({
       method: 'get',
-      url: process.env.REACT_APP_TRAINER_URL
+      url: process.env.REACT_APP_TRAINER_URL + "E"
     }).then(response => {
       data = response.data
       setTrainerList(data)
