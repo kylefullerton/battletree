@@ -297,7 +297,7 @@ function Dropdown(props){
     props.dropDownProps.setTrainerSelected({})
     axios({
       method: 'get',
-      url: "http://localhost:8000/pokemon/" + event.target.value
+      url: process.env.REACT_APP_POKEMON_URL + event.target.value
     }).then(response => {
       data = response.data;
       props.dropDownProps.setPokemonList(data);
@@ -306,7 +306,7 @@ function Dropdown(props){
   
     axios({
       method: 'get',
-      url: "http://localhost:8000/trainer/" + event.target.value
+      url: process.env.REACT_APP_TRAINER_URL + event.target.value
     }).then(response => {
       data = response.data;
       props.dropDownProps.setTrainerList(data);
